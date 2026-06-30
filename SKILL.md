@@ -1,6 +1,6 @@
 ---
-name: prompt-optimizer
-description: Optimize, rewrite, and structure prompts without executing the task inside the prompt. Use when the user asks in Chinese or English to optimize a prompt, rewrite this prompt, polish this prompt, 改写这个 prompt, 优化提示词, 帮我优化, 优化 system prompt, 优化 agent 指令, 帮我让 AI 做这件事, or invokes $prompt-optimizer. Supports rough natural-language requests, existing prompts, system/developer prompts, agent instructions, API prompts, structured-output prompts, and prompts with failure examples.
+name: lingqi
+description: Optimize, rewrite, and structure prompts without executing the task inside the prompt. Use when the user asks in Chinese or English to optimize a prompt, rewrite this prompt, polish this prompt, 改写这个 prompt, 优化提示词, 帮我优化, 优化 system prompt, 优化 agent 指令, 帮我让 AI 做这件事, or invokes $lingqi. Supports rough natural-language requests, existing prompts, system/developer prompts, agent instructions, API prompts, structured-output prompts, and prompts with failure examples.
 version: 1.2.0
 author: Hermes Agent
 license: MIT
