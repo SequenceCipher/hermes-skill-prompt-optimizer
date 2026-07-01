@@ -1,0 +1,45 @@
+name: Validate Skill
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run check_prompt_artifact.py
+        run: |
+          echo "## 最终提示词\n\n这是一个测试 prompt。\n\n## 改动说明\n\n- 测试改动" > /tmp/test-prompt.md
+          python3 scripts/check_prompt_artifact.py /tmp/test-prompt.md
+
+      - name: Run score_prompt_shape.py
+        run: |
+          echo "# Test Prompt\n\n你的任务是优化 prompt。\n\n要求：\n- 保持简洁\n- 输出 JSON 格式\n\n示例：\n- 输入：帮我写代码\n- 输出：你是一个代码生成专家..." > /tmp/test-score.md
+          python3 scripts/score_prompt_shape.py /tmp/test-score.md
+
+      - name: Validate SKILL.md frontmatter
+        run: |
+          python3 -c "
+          import yaml, re
+          with open('SKILL.md', 'r') as f:
+              content = f.read()
+          assert content.startswith('---'), 'Missing opening ---'
+          m = re.search(r'\n---\s*\n', content[3:])
+          assert m, 'Missing closing ---'
+          fm = yaml.safe_load(content[3:m.start()+3])
+          assert 'name' in fm, 'Missing name'
+          assert 'description' in fm, 'Missing description'
+          assert len(fm['description']) <= 1024, 'Description too long'
+          assert fm['name'] == 'lingqi', f\"Name mismatch: {fm['name']}\"
+          print('SKILL.md frontmatter validated OK')
+          "
