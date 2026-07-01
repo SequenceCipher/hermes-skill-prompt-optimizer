@@ -56,30 +56,15 @@ hermes skills install https://raw.githubusercontent.com/SequenceCipher/hermes-sk
 
 ### Claude Code
 
-将 SKILL.md 的内容复制到项目根目录的 `CLAUDE.md` 中，或放入 `.claude/skills/lingqi.md`：
+将 SKILL.md 的内容放入 `.claude/skills/lingqi.md`：
 
 ```bash
-# 项目级（团队成员共享）
 mkdir -p .claude/skills
 curl -sL https://raw.githubusercontent.com/SequenceCipher/hermes-skill-lingqi/main/SKILL.md \
   > .claude/skills/lingqi.md
 ```
 
 Claude Code 会自动加载 `.claude/skills/*.md` 作为 skills。
-
-### OpenAI Codex
-
-通过 `--append-system-prompt-file` 加载：
-
-```bash
-# 临时加载
-codex exec "优化这个 prompt..." \
-  --append-system-prompt-file .claude/skills/lingqi.md
-
-# 或写入项目 AGENTS.md
-curl -sL https://raw.githubusercontent.com/SequenceCipher/hermes-skill-lingqi/main/SKILL.md \
-  >> AGENTS.md
-```
 
 ### OpenCode
 
