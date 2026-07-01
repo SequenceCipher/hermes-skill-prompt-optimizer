@@ -1,0 +1,5 @@
+interface:
+  display_name: "Prompt Optimizer"
+  short_description: "优化自然语言、system prompt 和 agent 指令"
+  default_prompt: "Use $prompt-optimizer to rewrite this rough request into a clear, reusable prompt."
+
